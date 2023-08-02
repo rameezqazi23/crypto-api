@@ -10,5 +10,3 @@ const Account = () => {
 }
 
 export default Account
-
-Account
