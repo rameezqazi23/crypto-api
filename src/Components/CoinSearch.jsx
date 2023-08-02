@@ -1,51 +1,55 @@
-import React from 'react'
-import { AiOutlineStar } from 'react-icons/ai';
+import React, { useState } from 'react'
+
+import CoinItem from './CoinItem';
+
 
 const CoinSearch = ({ coins }) => {
   console.log(coins)
+  const [searchCoin, setSearchCoin] = useState("")
+  console.log(searchCoin)
+
   return (
-    <div>
-      <div>
-        <h1>Search</h1>
+    <div className='rounded-div my-y '>
+      <div className='flex flex-col md:flex-row justify-between pt-4 pb-6 text-center md:text-right'>
+        <h1 className='text-2xl font-bold my-2'>Find</h1>
         <form action="">
-          <input type="text" placeholder='Seach favourite coin' />
+          <input className='w-full bg-primary border border-input px-2 py-4 rounded-xl shadow-xl' 
+          onChange={(e) => setSearchCoin(e.target.value)} type="text" placeholder='Seach coins...' />
+          <button>Search</button>
         </form>
 
       </div>
-      <table>
+      <table className='w-full border-collapse text-center'>
         <thead>
-          <tr>
+          <tr className='border-b'>
             <th></th>
-            <th>#</th>
-            <th>Coin</th>
+            <th className='px-4'>#</th>
+            <th className='text-left'>Coin</th>
             <th>Symbol</th>
             <th>Price</th>
             <th>24h</th>
-            <th>24h Volume</th>
-            <th>Market</th>
+            <th className='hidden md:table-cell'>24h Volume</th>
+            <th className='hidden md:table-cell'>Market</th>
             <th>Last 7 days</th>
 
           </tr>
         </thead>
         <tbody>
-          {coins.map((coin, index) => (
-            <tr>
-              <td><AiOutlineStar /></td>
-              <td>{coin.market_cap_rank}</td>
-              <td>
-                <div className='flex'>
-                  <img src={coin.image} alt={coin.id} />
-                  <p>{coin.name}</p>
-                </div>
-              </td>
-              <td>{coin.symbol}</td>
-              <td>{coin.current_price}</td>
-              <td>{coin.price_change_percentage_24h}</td>
-              <td>{coin.total_volume}</td>
-              <td>{coin.market_cap}</td>
-              <td>{coin.sparkline_in_7d.price}</td>
-            </tr>
-          ))}
+          {/* display all coins by default if search any of the coin they filters the item and map
+          respectively that's how coins.filter().map() works */}
+          {coins.filter((value) => {
+
+            if (searchCoin === '') {
+              return value;
+
+            } else if (value.name.toLowerCase().includes(searchCoin.toLowerCase())) {
+              return value;
+            }
+
+          }).map((coin, index) => (
+            <CoinItem coin={coin} key={coin.id} />
+          ))
+          }
 
         </tbody>
       </table>
