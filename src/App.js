@@ -1,10 +1,22 @@
-import './App.css';
+import { ThemeProvider } from './Context/ThemeContext';
+import { Route, BrowserRouter as Router } from 'react-router-dom';
+import { Routes } from 'react-router-dom';
+import Navbar from './Components/Navbar';
+import Home from './Routes/Home';
+
 
 function App() {
   return (
-    <div>
-      <h1 className='text-2xl font-bold text-center font-mono'>Crypto API</h1>
-    </div>
+    <ThemeProvider>
+      <Router>
+        <Navbar />
+        {/* <Routes>
+          <Route element={<Home />} />
+        </Routes> */}
+      </Router>
+
+
+    </ThemeProvider>
   );
 }
 

@@ -20,7 +20,7 @@ module.exports = {
 
       },
       
-      borderCOlor: {
+      borderColor: {
         accent: 'var(--color-text-accent)',
         primary: 'var(--color-bg-primary)',
         secondary: 'var(--color-bg-secondary)',
