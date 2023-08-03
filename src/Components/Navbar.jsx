@@ -9,7 +9,7 @@ const Navbar = () => {
         setNavView(!navView)
     }
     return (
-        <div className='rounded-div flex items-center justify-between h-20 font-bold'>
+        <div className='rounded-div flex items-center justify-between h-20 font-bold z-10'>
             <Link to='/'>
                 <h1 className='text-2xl'>Crypto Base</h1>
             </Link>
@@ -31,7 +31,7 @@ const Navbar = () => {
             {/* md:hidden fixed w-full h-[90%] flex flex-col justify-between items-center left-0 top-20 mx-auto bg-primary ease-in duration-500 */}
 
             <div className={!navView ? 'fixed left-[100%] top-20 h-[90%] flex flex-col items-center justify-between ease-in duration-500'
-                : 'md:hidden fixed w-full h-[90%] flex flex-col justify-between items-center left-0 top-20 mx-auto bg-primary ease-in duration-500'}>
+                : 'md:hidden fixed w-full h-[90%] flex flex-col justify-between items-center left-0 top-20 mx-auto bg-primary ease-in z-10 duration-500'}>
                 <ul className='w-full p-4'>
                     <li className='border-b py-6' to='/'>Home</li>
                     <li className='border-b py-6' to='/'>Account</li>
