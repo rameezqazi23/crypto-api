@@ -9,7 +9,7 @@ const CoinSearch = ({ coins }) => {
   console.log(searchCoin)
 
   return (
-    <div className='rounded-div my-y '>
+    <div className='rounded-div my-y'>
       <div className='flex flex-col md:flex-row justify-between pt-4 pb-6 text-center md:text-right'>
         <h1 className='text-2xl font-bold my-2'>Find</h1>
         <form action="">

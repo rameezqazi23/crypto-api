@@ -13,7 +13,7 @@ const Navbar = () => {
             <Link to='/'>
                 <h1 className='text-2xl'>Crypto Base</h1>
             </Link>
-            <div className='hidden md:block '>
+            <div className='hidden md:block ease-in duration-500'>
                 <ThemeToggle />
             </div>
 

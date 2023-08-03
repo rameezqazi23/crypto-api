@@ -6,6 +6,7 @@ import Home from './Routes/Home';
 import SignIn from './Routes/SignIn';
 import SignUp from './Routes/SignUp';
 import Account from './Routes/Account';
+import CoinPage from './Routes/CoinPage';
 import axios from 'axios';
 import { useState,useEffect } from 'react';
 
@@ -32,6 +33,9 @@ function App() {
           <Route path='/signin' element={<SignIn />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/account' element={<Account />} />
+          <Route path='/coin/:coinId' element={<CoinPage />}>
+            <Route path=':coinId'/>
+          </Route>
 
 
         </Routes>

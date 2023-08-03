@@ -5,8 +5,9 @@ import ContentLoader from 'react-content-loader';
 const TableCotentLoader = (props) =>
 (
     <ContentLoader
-        width={1000}
-        height={550}
+        // width={1000}
+        // height={550}
+        className='max-w-[1140px] px-2 w-full mx-auto'
         viewBox="0 0 1000 550"
         backgroundColor="#eaeced"
         foregroundColor="#ffffff"
