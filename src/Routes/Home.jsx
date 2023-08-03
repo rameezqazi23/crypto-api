@@ -1,11 +1,16 @@
 import React from 'react'
 import CoinSearch from '../Components/CoinSearch'
+import TableContentLoader from '../Components/TableCotentLoader'
+import Trending from '../Components/Trending'
 
-const Home = ({coins}) => {
+const Home = ({ coins }) => {
   return (
     <div>
-        <CoinSearch coins={coins}/>
-      
+      {/* {coins.data ? <TableContentLoader /> : <CoinSearch coins={coins} />} */}
+      <CoinSearch coins={coins} />
+      <Trending />
+
+
     </div>
   )
 }
