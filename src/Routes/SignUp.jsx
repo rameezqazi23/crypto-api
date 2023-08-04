@@ -2,9 +2,35 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
+import { UserAuth } from '../Context/AuthContext';
 
 
 const SignUp = () => {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const { createUser } = UserAuth()
+
+  const handleSubmit = async() => {
+
+    setError('')
+    try {
+      await createUser(email,password)
+      
+    } catch (error) {
+      setError(error.message)
+      console.log("Create User err msg==>", error.message)
+      
+    }
+
+
+    console.log({ email, password })
+
+  }
+
+
   return (
     <div className="flex mt-8 justify-center items-center">
       <Form
@@ -14,7 +40,7 @@ const SignUp = () => {
           remember: true,
         }}
 
-        // onFinish={handleSubmit}
+        onFinish={handleSubmit}
       >
         <h1 className='text-center text-2xl font-bold mb-11'>Create Your Account</h1>
         <Form.Item
@@ -26,7 +52,9 @@ const SignUp = () => {
             },
           ]}
         >
-          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username"
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </Form.Item>
         <Form.Item
           name="password"
@@ -41,7 +69,7 @@ const SignUp = () => {
             prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
             placeholder="Password"
-            // onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Item>
         <Form.Item>

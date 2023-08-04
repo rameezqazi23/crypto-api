@@ -8,7 +8,8 @@ import SignUp from './Routes/SignUp';
 import Account from './Routes/Account';
 import CoinPage from './Routes/CoinPage';
 import axios from 'axios';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { AuthContextProvider } from './Context/AuthContext';
 
 
 function App() {
@@ -22,25 +23,28 @@ function App() {
     })
   }, [url])
 
-  
+
 
   return (
     <ThemeProvider>
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path='/' element={<Home coins={coins}/>} />
-          <Route path='/signin' element={<SignIn />} />
-          <Route path='/signup' element={<SignUp />} />
-          <Route path='/account' element={<Account />} />
-          <Route path='/coin/:coinId' element={<CoinPage />}>
-            <Route path=':coinId'/>
-          </Route>
+      <AuthContextProvider>
+
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path='/' element={<Home coins={coins} />} />
+            <Route path='/signin' element={<SignIn />} />
+            <Route path='/signup' element={<SignUp />} />
+            <Route path='/account' element={<Account />} />
+            <Route path='/coin/:coinId' element={<CoinPage />}>
+              <Route path=':coinId' />
+            </Route>
 
 
-        </Routes>
-      </Router>
+          </Routes>
+        </Router>
 
+      </AuthContextProvider>
 
     </ThemeProvider>
   );

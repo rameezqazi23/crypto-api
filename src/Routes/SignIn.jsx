@@ -2,8 +2,30 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
+import { UserAuth } from '../Context/AuthContext';
 
 const SignIn = () => {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const { userSignIn } = UserAuth();
+
+  const handleSubmit = async () => {
+    setError('')
+    try {
+      await userSignIn(email, password)
+        .then(alert("SignIn successfull"))
+
+    } catch (error) {
+      setError(error.message)
+      console.log("Sign In err msg==>", error.message)
+
+    }
+
+
+  }
 
 
 
@@ -15,7 +37,7 @@ const SignIn = () => {
         initialValues={{
           remember: true,
         }}
-      // onFinish={handleSubmit}
+        onFinish={handleSubmit}
       >
         <h1 className='text-center text-2xl mb-3'>Welcome</h1>
         <h1 className='text-center text-2xl font-bold mb-11'>Signin Your Account</h1>
@@ -29,7 +51,9 @@ const SignIn = () => {
             },
           ]}
         >
-          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username"
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </Form.Item>
         <Form.Item
           name="password"
@@ -43,6 +67,7 @@ const SignIn = () => {
           ]}
         >
           <Input
+            onChange={(e) => setPassword(e.target.value)}
             prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
             placeholder="Password"
