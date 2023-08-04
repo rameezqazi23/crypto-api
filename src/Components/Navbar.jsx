@@ -1,10 +1,30 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
+import { UserAuth } from '../Context/AuthContext';
+import { auth } from '../Firebase/Firebase';
 
 const Navbar = () => {
     const [navView, setNavView] = useState(false)
+    const { userSignOut, user } = UserAuth();
+    const navigate = useNavigate();
+
+    const handleSignOut = async () => {
+        try {
+            await userSignOut(auth)
+            navigate('/')
+
+
+        } catch (error) {
+            console.log(error.message)
+
+
+        }
+    }
+
+
+
     const handleNavigation = () => {
         setNavView(!navView)
     }
@@ -16,12 +36,25 @@ const Navbar = () => {
             <div className='hidden md:block ease-in duration-500'>
                 <ThemeToggle />
             </div>
+            {user?.email ? (
+                <div>
+                    <Link to='/account' className='p-4'>My Account</Link>
+                    <button onClick={handleSignOut}>Sign Out</button>
+                </div>
+            )
+                : (
+                    <div className='hidden md:block'>
+                        <Link className='p-4 hover:text-accent' to='/signin'>Sign In</Link>
+                        <Link className='bg-button text-btnText px-5 py-2 ml-2 rounded-2xl shadow-lg hover:shadow-2xl' to='/signup'>Sign Up</Link>
 
-            <div className='hidden md:block'>
-                <Link className='p-4 hover:text-accent' to='/signin'>Sign In</Link>
-                <Link className='bg-button text-btnText px-5 py-2 ml-2 rounded-2xl shadow-lg hover:shadow-2xl' to='/signup'>Sign Up</Link>
+                    </div>
 
-            </div>
+                )}
+
+
+
+
+
             {/* Menu Icon */}
             <div onClick={handleNavigation} className='block md:hidden justify-end cursor-pointer z-10'>
                 {!navView ? <AiOutlineMenu /> : <AiOutlineClose />}
@@ -38,6 +71,7 @@ const Navbar = () => {
                     <li className='py-6' to='/'><ThemeToggle /></li>
 
                 </ul>
+
                 <div className='flex flex-col w-full p-4'>
                     <Link to='/signin'>
                         <button className='w-full my-2 p-3 bg-primary text-primary burder border-secondary rounded-2xl shadow-xl'>Sign In</button>
@@ -46,6 +80,9 @@ const Navbar = () => {
                         <button className='w-full my-2 p-3 bg-button text-primary rounded-2xl shodow-xl'>Sign Up</button>
                     </Link>
                 </div>
+
+
+
             </div>
 
 

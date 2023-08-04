@@ -3,8 +3,10 @@ import { auth, db } from '../Firebase/Firebase';
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
-    onAuthStateChanged
+    onAuthStateChanged,
+    signOut
 } from 'firebase/auth';
+
 import { doc, setDoc } from 'firebase/firestore';
 
 
@@ -17,17 +19,19 @@ export const AuthContextProvider = ({ children }) => {
     const [user, setUser] = useState({});
 
     const createUser = (email, password) => {
-
-        return createUserWithEmailAndPassword(auth, email, password)
-        // return setDoc(doc(db, 'users', email), {
-        //     bookmarks: [],
-        // })
-
+        createUserWithEmailAndPassword(auth, email, password)
+        return setDoc(doc(db, 'users', email), {
+            bookmarks: [],
+        })
     }
 
     const userSignIn = (email, password) => {
         return signInWithEmailAndPassword(auth, email, password)
 
+    }
+
+    const userSignOut = () => {
+        signOut(auth)
     }
 
     useEffect(() => {
@@ -41,7 +45,7 @@ export const AuthContextProvider = ({ children }) => {
 
 
     return (
-        <UserContext.Provider value={{ createUser, user, userSignIn }}>
+        <UserContext.Provider value={{ createUser, user, userSignIn, userSignOut }}>
             {children}
         </UserContext.Provider>
     )

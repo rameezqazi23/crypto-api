@@ -10,6 +10,7 @@ import CoinPage from './Routes/CoinPage';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { AuthContextProvider } from './Context/AuthContext';
+import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
 
 
 function App() {
@@ -35,7 +36,13 @@ function App() {
             <Route path='/' element={<Home coins={coins} />} />
             <Route path='/signin' element={<SignIn />} />
             <Route path='/signup' element={<SignUp />} />
-            <Route path='/account' element={<Account />} />
+
+            <Route path='/account' element={
+              <ProtectedRoute>
+                <Account />
+
+              </ProtectedRoute>
+            } />
             <Route path='/coin/:coinId' element={<CoinPage />}>
               <Route path=':coinId' />
             </Route>

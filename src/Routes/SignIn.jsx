@@ -10,13 +10,15 @@ const SignIn = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+  const navigate = useNavigate()
   const { userSignIn } = UserAuth();
 
   const handleSubmit = async () => {
     setError('')
     try {
       await userSignIn(email, password)
-        .then(alert("SignIn successfull"))
+      navigate('/account')
+      // .then(alert("SignIn successfull"))
 
     } catch (error) {
       setError(error.message)
@@ -41,6 +43,7 @@ const SignIn = () => {
       >
         <h1 className='text-center text-2xl mb-3'>Welcome</h1>
         <h1 className='text-center text-2xl font-bold mb-11'>Signin Your Account</h1>
+        {error ? (<p className='text-red-600'>{error}</p>) : null}
         <Form.Item
           name="username"
           // help={error}

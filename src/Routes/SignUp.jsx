@@ -12,12 +12,15 @@ const SignUp = () => {
   const [error, setError] = useState('');
 
   const { createUser } = UserAuth()
+  const navigate = useNavigate()
 
   const handleSubmit = async() => {
 
     setError('')
     try {
       await createUser(email,password)
+      navigate('/account')
+
       
     } catch (error) {
       setError(error.message)
