@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { UserAuth } from "../Context/AuthContext";
-import { collection, doc, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../Firebase/Firebase";
 
 const SavedCoin = () => {
@@ -15,6 +21,21 @@ const SavedCoin = () => {
     });
     // console.log("Getting data from firebase==>",bookmarks)
   }, [user?.email]);
+
+  const coinPath = doc(db, "users", `${user.email}`);
+
+  console.log("Coin data 45433", coins);
+
+  const deleteCoin = async (coinId) => {
+    try {
+      const result = coins.filter((item) => item.id !== coinId);
+      await updateDoc(coinPath, {
+        bookmarks: result,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <div>
@@ -50,7 +71,10 @@ const SavedCoin = () => {
                   </Link>
                 </td>
                 <td className="pl-8">
-                  <AiOutlineClose className="cursor-pointer" />
+                  <AiOutlineClose
+                    onClick={() => deleteCoin(coin.id)}
+                    className="cursor-pointer"
+                  />
                 </td>
               </tr>
             ))}

@@ -1,35 +1,28 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input } from 'antd';
-import { UserAuth } from '../Context/AuthContext';
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { Button, Checkbox, Form, Input } from "antd";
+import { UserAuth } from "../Context/AuthContext";
 
 const SignIn = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { userSignIn } = UserAuth();
 
   const handleSubmit = async () => {
-    setError('')
+    setError("");
     try {
-      await userSignIn(email, password)
-      navigate('/account')
+      await userSignIn(email, password);
+      navigate("/account");
       // .then(alert("SignIn successfull"))
-
     } catch (error) {
-      setError(error.message)
-      console.log("Sign In err msg==>", error.message)
-
+      setError(error.message);
+      console.log("Sign In err msg==>", error.message);
     }
-
-
-  }
-
-
+  };
 
   return (
     <div className="flex mt-8 justify-center items-center">
@@ -41,31 +34,35 @@ const SignIn = () => {
         }}
         onFinish={handleSubmit}
       >
-        <h1 className='text-center text-2xl mb-3'>Welcome</h1>
-        <h1 className='text-center text-2xl font-bold mb-11'>Signin Your Account</h1>
-        {error ? (<p className='text-red-600'>{error}</p>) : null}
+        <h1 className="text-center text-2xl mb-3">Welcome</h1>
+        <h1 className="text-center text-2xl font-bold mb-11">
+          Signin Your Account
+        </h1>
+        {error ? <p className="text-red-600">{error}</p> : null}
         <Form.Item
           name="username"
           // help={error}
           rules={[
             {
               required: true,
-              message: 'Please input your Username!',
+              message: "Please input your Username!",
             },
           ]}
         >
-          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username"
+          <Input
+            prefix={<UserOutlined className="site-form-item-icon" />}
+            placeholder="Username"
             onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Item>
         <Form.Item
+         
           name="password"
           // help={error}
           rules={[
             {
               required: true,
-              message: 'Please input your Password!',
-
+              message: "Please input your Password!",
             },
           ]}
         >
@@ -89,11 +86,18 @@ const SignIn = () => {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="login-form-button w-full bg-sky-600">
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="login-form-button w-full bg-sky-600"
+          >
             Log in
           </Button>
           <br />
-          Or <Link className='underline' to='/signup'>register now!</Link>
+          Or{" "}
+          <Link className="underline" to="/signup">
+            register now!
+          </Link>
         </Form.Item>
         {/* <Form.Item >
 
@@ -101,7 +105,7 @@ const SignIn = () => {
                 </Form.Item> */}
       </Form>
     </div>
-  )
-}
+  );
+};
 
-export default SignIn
+export default SignIn;
