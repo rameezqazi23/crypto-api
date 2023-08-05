@@ -12,7 +12,6 @@ const SavedCoin = () => {
   useEffect(() => {
     onSnapshot(doc(db, "users", `${user?.email}`), (doc) => {
       setCoins(doc.data()?.bookmarks);
-
     });
     // console.log("Getting data from firebase==>",bookmarks)
   }, [user?.email]);
@@ -34,7 +33,7 @@ const SavedCoin = () => {
             </tr>
           </thead>
           <tbody>
-            {coins?.map((coin) => {
+            {coins?.map((coin) => (
               <tr className="h-[60px] overflow-hidden" key={coin.id}>
                 <td>{coin?.rank}</td>
                 <td>
@@ -53,8 +52,8 @@ const SavedCoin = () => {
                 <td className="pl-8">
                   <AiOutlineClose className="cursor-pointer" />
                 </td>
-              </tr>;
-            })}
+              </tr>
+            ))}
           </tbody>
         </table>
       )}

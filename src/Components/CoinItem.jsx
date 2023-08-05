@@ -11,8 +11,8 @@ const CoinItem = ({ coin }) => {
 
   const { user } = UserAuth();
 
-  const x = coin.price_change_percentage_24h;
-  console.log(x.toFixed(1));
+//   const x = coin.price_change_percentage_24h;
+//   console.log(x.toFixed(1));
   console.log("Coin Saved", favCoin);
 
   const coinPath = doc(db, "users", `${user?.email}`);
