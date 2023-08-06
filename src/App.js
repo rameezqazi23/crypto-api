@@ -11,6 +11,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { AuthContextProvider } from './Context/AuthContext';
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
+import { Analytics } from '@vercel/analytics/react';
 
 
 function App() {
@@ -27,33 +28,36 @@ function App() {
 
 
   return (
-    <ThemeProvider>
-      <AuthContextProvider>
+    <>
+      <ThemeProvider>
+        <AuthContextProvider>
 
-        <Router>
-          <Navbar />
-          <Routes>
-            <Route path='/' element={<Home coins={coins} />} />
-            <Route path='/signin' element={<SignIn />} />
-            <Route path='/signup' element={<SignUp />} />
+          <Router>
+            <Navbar />
+            <Routes>
+              <Route path='/' element={<Home coins={coins} />} />
+              <Route path='/signin' element={<SignIn />} />
+              <Route path='/signup' element={<SignUp />} />
 
-            <Route path='/account' element={
-              <ProtectedRoute>
-                <Account />
+              <Route path='/account' element={
+                <ProtectedRoute>
+                  <Account />
 
-              </ProtectedRoute>
-            } />
-            <Route path='/coin/:coinId' element={<CoinPage />}>
-              <Route path=':coinId' />
-            </Route>
+                </ProtectedRoute>
+              } />
+              <Route path='/coin/:coinId' element={<CoinPage />}>
+                <Route path=':coinId' />
+              </Route>
 
 
-          </Routes>
-        </Router>
+            </Routes>
+          </Router>
 
-      </AuthContextProvider>
+        </AuthContextProvider>
 
-    </ThemeProvider>
+      </ThemeProvider>
+      <Analytics />
+    </>
   );
 }
 
