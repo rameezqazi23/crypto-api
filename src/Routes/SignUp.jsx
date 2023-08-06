@@ -29,7 +29,7 @@ const SignUp = () => {
     }
 
 
-    console.log({ email, password })
+    // console.log({ email, password })
 
   }
 
@@ -80,7 +80,7 @@ const SignUp = () => {
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
 
-          <a className="login-form-forgot" href="#">
+          <a className="login-form-forgot" href="/">
             Forgot password
           </a>
         </Form.Item>

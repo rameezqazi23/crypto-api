@@ -4,9 +4,9 @@ import CoinItem from './CoinItem';
 
 
 const CoinSearch = ({ coins }) => {
-  console.log(coins)
   const [searchCoin, setSearchCoin] = useState("")
-  console.log(searchCoin)
+  // console.log(coins)
+  // console.log(searchCoin)
 
   return (
     <div className='rounded-div my-y'>

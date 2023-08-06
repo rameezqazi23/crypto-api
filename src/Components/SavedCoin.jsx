@@ -2,19 +2,14 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { UserAuth } from "../Context/AuthContext";
-import {
-  collection,
-  deleteDoc,
-  doc,
-  onSnapshot,
-  updateDoc,
-} from "firebase/firestore";
+import { doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { db } from "../Firebase/Firebase";
 
 const SavedCoin = () => {
   const [coins, setCoins] = useState([]);
   const { user } = UserAuth();
 
+  //   getting data from firebase
   useEffect(() => {
     onSnapshot(doc(db, "users", `${user?.email}`), (doc) => {
       setCoins(doc.data()?.bookmarks);
@@ -24,8 +19,9 @@ const SavedCoin = () => {
 
   const coinPath = doc(db, "users", `${user.email}`);
 
-  console.log("Coin data 45433", coins);
+  // console.log("Coin data 45433", coins);
 
+  //delete array item from bookmarks  array to create delete coin functionality using filter method.
   const deleteCoin = async (coinId) => {
     try {
       const result = coins.filter((item) => item.id !== coinId);

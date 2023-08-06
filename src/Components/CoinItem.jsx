@@ -3,7 +3,7 @@ import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { Sparklines, SparklinesLine } from "react-sparklines";
 import { Link } from "react-router-dom";
 import { UserAuth } from "../Context/AuthContext";
-import { addDoc, arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { db } from "../Firebase/Firebase";
 
 const CoinItem = ({ coin }) => {
@@ -13,7 +13,7 @@ const CoinItem = ({ coin }) => {
 
 //   const x = coin.price_change_percentage_24h;
 //   console.log(x.toFixed(1));
-  console.log("Coin Saved", favCoin);
+  // console.log("Coin Saved", favCoin);
 
   const coinPath = doc(db, "users", `${user?.email}`);
   const addCoin = async () => {
